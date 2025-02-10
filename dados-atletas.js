@@ -10,21 +10,21 @@ class Atleta {
     calcularCategoria() {
         if (this.idade > 30 || this.idade < 9) {
             //Sem categoria
-            let categoria = "Sem categoria";
+            this.categoria = "Sem categoria";
         }else if (this.idade >= 16) {
             //Adulto
-            let categoria = "Adulto";
+            this.categoria = "Adulto";
         }else if (this.idade >= 14) {
             //Intermediario
-            let categoria = "Intermediario";
+            this.categoria = "Intermediario";
         }else if (this.idade >= 12) {
             //Juvenil
-            let categoria = "Juvenil";
+            this.categoria = "Juvenil";
         }else {
-            let categoria = "Infantil";
             //Infantil
+            this.categoria = "Infantil";
         }
-        this.categoria = categoria;
+        
     }
 
     calcularIMC() {
@@ -72,7 +72,7 @@ class Atleta {
 
     obtemCategoria() {
         this.calcularCategoria();
-        this.categoria;
+        return this.categoria;
     }
 
     obtemIMC() {
@@ -84,8 +84,12 @@ class Atleta {
         this.calcularMediaValida();
         return this.media;
     }
+
+    imprimir() {
+        return `Nome: ${this.nome}. \nIdade: ${this.idade} \nPeso: ${this.peso}. \nAltura ${this.altura}. \nNotas: ${this.notas}. \nCategoria: ${this.obtemCategoria()}. \nIMC: ${this.obtemIMC()}. \nMédia válida: ${this.obtemMediaValida()}.`
+    }
 }
 
-const atleta = new Atleta("Cesar Abascal",
-    30, 80, 1.70,
-    [10, 9.34, 8.42, 10, 7.88]);
+const atleta = new Atleta("Cesar Abascal", 30, 80, 1.70, [10, 9.34, 8.42, 10, 7.88]);
+
+console.log(atleta.imprimir());
