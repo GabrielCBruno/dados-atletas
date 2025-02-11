@@ -31,34 +31,21 @@ class Atleta {
         this.imc = this.peso/(this.altura * this.altura);
     }
 
-    ordenarNotasCrescente() {
-        let ordenado = this.notas;
-        let aux;
-        for(let i = 0; i < ordenado.length - 1; i++) {
-            for(let j = i + 1; j < ordenado.length; j++) {
-                if (ordenado[i] > ordenado[j]) {
-                    aux = ordenado[i];
-                    ordenado[i] = ordenado[j];
-                    ordenado[j] = aux;
-                }
-            }
-        }
-        return ordenado;
-    }
-
     calcularMediaValida() {
-        let notasOrdenadas = this.ordenarNotasCrescente().slice(1,4);
+        let notasOrdenadas = this.notas.sort(function(a, b) {
+            return (a - b);
+        }).slice(1,this.notas.length - 1);
         let soma = notasOrdenadas.reduce(function(total, atual) {
             return total + atual;
         }, 0);
-        this.media = soma/3;
+        this.media = soma/notasOrdenadas.length;
     }
 
     obtemNomeAtleta() {
         return this.nome;
     }
 
-    obtemNomeAtleta() {
+    obtemIdadeAtleta() {
         return this.idade;
     }
 
@@ -67,7 +54,7 @@ class Atleta {
     }
 
     obtemNotasAtleta() {
-        return this.notas;
+        return this.notas.join(", ");
     }
 
     obtemCategoria() {
@@ -86,7 +73,7 @@ class Atleta {
     }
 
     imprimir() {
-        return `Nome: ${this.nome}. \nIdade: ${this.idade} \nPeso: ${this.peso}. \nAltura ${this.altura}. \nNotas: ${this.notas}. \nCategoria: ${this.obtemCategoria()}. \nIMC: ${this.obtemIMC()}. \nMédia válida: ${this.obtemMediaValida()}.`
+        return `Nome: ${this.obtemNomeAtleta()}. \nIdade: ${this.obtemIdadeAtleta()}. \nPeso: ${this.obtemPesoAtleta()}. \nAltura ${this.altura}. \nNotas: ${this.obtemNotasAtleta()}. \nCategoria: ${this.obtemCategoria()}. \nIMC: ${this.obtemIMC()}. \nMédia válida: ${this.obtemMediaValida()}.`
     }
 }
 
